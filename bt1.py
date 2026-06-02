@@ -1,12 +1,40 @@
-print("—— PHẦN MỀM TÍNH TỔNG QUỸ LƯƠNG ——")
+# LỖI LOGIC:
+# Chương trình hiện tại đang dùng:
+# - Vòng lặp ngoài duyệt theo tháng
+# - Vòng lặp trong duyệt theo chi nhánh
 
-total_budget = 0
+# Điều này làm dữ liệu được nhóm theo tháng:
+# Tháng 1 -> Chi nhánh 1, 2, 3
+# Tháng 2 -> Chi nhánh 1, 2, 3
+# ...
 
-for employee_number in range(1, 4):
-    print("Đang xử lý nhân viên số", employee_number)
-    salary = int(input("  Nhập mức lương (VNĐ): "))
-    total_budget = total_budget + salary
+# Trong khi yêu cầu nghiệp vụ cần:
+# Gom toàn bộ dữ liệu của từng chi nhánh lại với nhau
 
-print("= KẾT QUẢ: TỔNG NGÂN SÁCH CẦN CHUẨN BỊ LÀ:", total_budget, "VNĐ")
+# Vì vậy:
+# - Vòng lặp ngoài phải duyệt theo chi nhánh
+# - Vòng lặp trong mới duyệt theo tháng
 
-# lối đặt total_budget ở trong vòng lập dẫn đến reset về 0 mỗi khi lập
+# Chương trình không sai cú pháp
+# Nhưng sai logic xử lý dữ liệu theo yêu cầu báo cáo nghiệp vụ
+
+# Sửa lỗi
+print("=== HỆ THỐNG BÁO CÁO DOANH THU ===")
+
+branch_count = int(input("Nhập số lượng chi nhánh: "))
+month_count = 3
+
+result = ""
+
+for branch in range(1, branch_count + 1):
+    result += f"\n--- Chi nhánh {branch} ---\n"
+    for month in range(1, month_count + 1):
+        revenue = int(
+            input(f"Nhập doanh thu Chi nhánh {branch}, tháng {month}: ")
+        )
+        result += (
+            f"Tháng {month}: {revenue} triệu đồng\n"
+        )
+
+print("\nKẾT QUẢ BÁO CÁO")
+print(result)
